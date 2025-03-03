@@ -29,11 +29,7 @@ resource "aws_instance" "debian_ec2" {
     delete_on_termination = true
   }
 
-  user_data = <<-EOF
-              #!/bin/bash
-              apt-get update -y
-              apt-get upgrade -y
-              EOF
+  user_data = file("./scripts/setup-instance.sh")
 
   tags = merge(
     var.tags,

@@ -7,7 +7,7 @@ resource "aws_key_pair" "ec2_key_pair" {
   key_name   = "${var.projeto}-${var.candidato}-key"
   public_key = tls_private_key.ec2_key.public_key_openssh
 
-    tags = merge(
+  tags = merge(
     var.tags,
     {
       Name = "${var.projeto}-${var.candidato}-ec2-key-pair"
