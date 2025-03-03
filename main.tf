@@ -22,6 +22,16 @@ module "keys" {
   tags      = local.tags
 }
 
+output "projeto" {
+  description = "Nome do Projeto"
+  value       = var.projeto
+}
+
+output "candidato" {
+  description = "Nome do Candidato"
+  value       = var.candidato
+}
+
 output "private_key" {
   description = "Chave privada para acessar a instância EC2"
   value       = tls_private_key.ec2_key.private_key_pem
