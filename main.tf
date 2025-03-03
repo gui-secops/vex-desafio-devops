@@ -10,6 +10,9 @@ module "intances" {
   projeto   = var.projeto
   candidato = var.candidato
   tags      = local.tags
+  main_subnet = module.network.main_subnet
+  ec2_key_pair = module.keys.ec2_key_pair
+  main_sg = module.network.main_sg
 }
 
 module "keys" {
