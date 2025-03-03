@@ -11,7 +11,7 @@ data "aws_ami" "debian12" {
     values = ["hvm"]
   }
 
-  owners = ["679593333241"]
+  owners = ["136693071363"]
 }
 
 resource "aws_instance" "debian_ec2" {
