@@ -16,16 +16,13 @@ variable "tags" {
 }
 
 variable "main_subnet" {
-  type        = string
   description = "Subnet to be used in EC2"
 }
 
 variable "ec2_key_pair" {
-  type        = string
   description = "Key Pair to be used in EC2"
 }
 
 variable "main_sg" {
-  type        = string
   description = "Security Group to be used in EC2"
 }

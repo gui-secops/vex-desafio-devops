@@ -5,7 +5,7 @@ module "network" {
   tags      = local.tags
 }
 
-module "intances" {
+module "instances" {
   source       = "./modules/instances"
   projeto      = var.projeto
   candidato    = var.candidato
@@ -34,11 +34,11 @@ output "candidato" {
 
 output "private_key" {
   description = "Chave privada para acessar a instância EC2"
-  value       = tls_private_key.ec2_key.private_key_pem
+  value       = module.keys.ec2_key.private_key_pem
   sensitive   = true
 }
 
 output "ec2_public_ip" {
   description = "Endereço IP público da instância EC2"
-  value       = aws_instance.debian_ec2.public_ip
+  value       = module.instances.debian_ec2.public_ip
 }

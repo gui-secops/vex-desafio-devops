@@ -15,11 +15,11 @@ data "aws_ami" "debian12" {
 }
 
 resource "aws_instance" "debian_ec2" {
-  ami             = data.aws_ami.debian12.id
-  instance_type   = "t2.micro"
-  subnet_id       = var.main_subnet.id
-  key_name        = var.ec2_key_pair.key_name
-  security_groups = [var.main_sg.name]
+  ami                    = data.aws_ami.debian12.id
+  instance_type          = "t2.micro"
+  subnet_id              = var.main_subnet.id
+  key_name               = var.ec2_key_pair.key_name
+  vpc_security_group_ids = [var.main_sg.id]
 
   associate_public_ip_address = true
 
