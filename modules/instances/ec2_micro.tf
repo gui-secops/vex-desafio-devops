@@ -29,6 +29,12 @@ resource "aws_instance" "debian_ec2" {
     delete_on_termination = true
   }
 
+  depends_on = [
+    aws_security_group.main_sg,
+    aws_internet_gateway.main_igw
+  ]
+
+
   user_data = file("./scripts/setup-instance.sh")
 
   tags = merge(
