@@ -26,3 +26,7 @@ variable "ec2_key_pair" {
 variable "main_sg" {
   description = "Security Group to be used in EC2"
 }
+
+variable "main_igw" {
+  description = "IGW to be used in EC2"
+}

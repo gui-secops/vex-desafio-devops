@@ -13,6 +13,7 @@ module "instances" {
   main_subnet  = module.network.main_subnet
   ec2_key_pair = module.keys.ec2_key_pair
   main_sg      = module.network.main_sg
+  main_igw     = module.network.main_igw
 }
 
 module "keys" {

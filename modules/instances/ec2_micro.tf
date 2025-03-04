@@ -11,7 +11,7 @@ data "aws_ami" "debian12" {
     values = ["hvm"]
   }
 
-  owners = ["136693071363"]
+  owners = ["679593333241"]
 }
 
 resource "aws_instance" "debian_ec2" {
@@ -30,12 +30,11 @@ resource "aws_instance" "debian_ec2" {
   }
 
   depends_on = [
-    aws_security_group.main_sg,
-    aws_internet_gateway.main_igw
+    var.main_sg,
+    var.main_igw
   ]
 
-
-  user_data = file("./scripts/setup-instance.sh")
+    user_data = file("./scripts/setup-instance.sh")
 
   tags = merge(
     var.tags,

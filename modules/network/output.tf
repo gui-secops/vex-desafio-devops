@@ -12,3 +12,8 @@ output "main_subnet" {
   description = "Subnet"
   value       = aws_subnet.main_subnet
 }
+
+output "main_igw" {
+  description = "IGW"
+  value       = aws_internet_gateway.main_igw
+}
