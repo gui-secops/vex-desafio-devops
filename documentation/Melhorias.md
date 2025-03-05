@@ -156,4 +156,4 @@ Fontes utilizadas:
 
 ### SERVIDOR EM FUNCIONAMENTO
 
-[Servidor NGINX]()
+[Servidor NGINX](https://drive.google.com/file/d/1KZ9R_zGT8iwH5ZFgOkNWE4BC6tOVoSdf/view?usp=sharing)

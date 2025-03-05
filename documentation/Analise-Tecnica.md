@@ -168,12 +168,68 @@ Com a etapa da busca pela AMI realizada, se pode criar a instância com o recurs
 A definição do "ami" se dá pela referência do data source criado anteriormente, puxando o seu recurso, nome e id ``ami = data.aws_ami.debian12.id``. O próximo passo é o de tipo da instância, que no caso, é definido a t2.micro que é declarado como ``instance_type = "t2.micro"``.  
 Os blocos de "subnet_id", "key_name" e "security_groups" fazem a sua chamado pelo recurso, nome e id (ou nome). As suas declarações, respectivamente são: ``subnet_id = aws_subnet.main_subnet.id``, ``key_name = aws_key_pair.ec2_key_pair.key_name`` e ``security_groups = [aws_security_group.main_sg.name]``. A definição do próximo argumento ``associate_public_ip_address = true`` garante que a instância EC2 possua um endereço IP público.
 O bloco de argumentos "root_block_device", garante determinadas ações do volume de armazenamento. No exemplo dado, é definido um volume de 20GB, do tipo gp2 e com a destruição do volume no término da instância.  
-Por fim, há o bloco "user_data" que é utilizada para passar comandos que irão ser executados quando a instância for iniciada pela primeira vez. No caso do exemplo, há um script para ser executado com Shell Script e os comandos de update e upgrade que irão atualizar e instalar as versões mais recentes dos pacotes. Com isso, há a garantia de que a instância, ao ser executada pela primeira vez, terá todos os pacotes mais recentes.  
+Por fim, há o bloco "user_data" que é utilizada para passar comandos que irão ser executados quando a instância for iniciada pela primeira vez. No caso do exemplo, há um script para ser executado com Shell Script e os comandos de update e upgrade que irão atualizar e instalar as versões mais recentes dos pacotes. Com isso, há a garantia de que a instância, ao ser executada pela primeira vez, terá todos os pacotes mais recentes.
+
+```
+data "aws_ami" "debian12" {
+  most_recent = true
+
+  filter {
+    name   = "name"
+    values = ["debian-12-amd64-*"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  owners = ["679593333241"]
+}
+
+resource "aws_instance" "debian_ec2" {
+  ami             = data.aws_ami.debian12.id
+  instance_type   = "t2.micro"
+  subnet_id       = aws_subnet.main_subnet.id
+  key_name        = aws_key_pair.ec2_key_pair.key_name
+  security_groups = [aws_security_group.main_sg.name]
+
+  associate_public_ip_address = true
+
+  root_block_device {
+    volume_size           = 20
+    volume_type           = "gp2"
+    delete_on_termination = true
+  }
+
+  user_data = <<-EOF
+              #!/bin/bash
+              apt-get update -y
+              apt-get upgrade -y
+              EOF
+
+  tags = {
+    Name = "${var.projeto}-${var.candidato}-ec2"
+  }
+}
+```
 
 No fim do código, ainda há dois "outputs" que disponibilizam informações sobra a infraestrutura na CLI.  
 O primeiro output é o de ``value = tls_private_key.ec2_key.private_key_pem`` que retorna o valor da chave private, porém possui também o atributo de ``sensitive = true`` que irá ocultar o valor.
 Já o segundo output é o de ``value  = aws_instance.debian_ec2.public_ip`` que irá retornar o valor do endereço IP público da instância EC2 criada.  
 
+```
+output "private_key" {
+  description = "Chave privada para acessar a instância EC2"
+  value       = tls_private_key.ec2_key.private_key_pem
+  sensitive   = true
+}
+
+output "ec2_public_ip" {
+  description = "Endereço IP público da instância EC2"
+  value       = aws_instance.debian_ec2.public_ip
+}
+```
 
 ### OBSERVAÇÕES
 
