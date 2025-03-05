@@ -142,6 +142,8 @@ resource "aws_instance" "debian_ec2" {
 user_data = file("./scripts/setup-instance.sh")
 ```
 
+8. Para adicionar uma documentação automatizada ao projeto Terraform, incluí o **terraform-docs** que tem a função de gerar uma documentação com a apresentação dos requerimentos, provedores, inputs e outputs dos módulos do projeto. Com isso, é possível garantir melhor apresentação e organização das características da infraestrutura criada.
+
 ### EDIÇÕES FUTURAS E RECURSOS UTILIZADOS
 
 O código elaborado ainda pode passar por melhorias como na implementação de pre-commit hooks. Esse hooks podem garantir diversas melhorias a serem implementadas antes dpo commit do código. Um exemplo é no uso do ```terraform_fmt```, onde o arquivo é totalmente formatado pela indentação do Terraform. Outro exemplo é o ```terraform_validate```, que irá validar os arquivos Terraform usados na infraestrutura.
@@ -150,7 +152,7 @@ Fontes utilizadas:
 [Documentação AWS](https://docs.aws.amazon.com/pt_br/)  
 [Documentação Terraform - Hashicorp](https://developer.hashicorp.com/terraform/docs)  
 [Documentação Terraform - Registry](https://registry.terraform.io/)  
-[Documentação Terraform-Docs]()
+[Documentação Terraform-Docs](https://terraform-docs.io/)
 
 ### SERVIDOR EM FUNCIONAMENTO
 
