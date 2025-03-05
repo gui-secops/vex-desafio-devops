@@ -12,5 +12,5 @@ variable "candidato" {
 
 variable "tags" {
   type        = map(any)
-  description = "Tags to be added to AWS resources"
+  description = "Tags para adicionar nos recursos AWS"
 }

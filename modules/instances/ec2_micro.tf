@@ -34,7 +34,7 @@ resource "aws_instance" "debian_ec2" {
     var.main_igw
   ]
 
-    user_data = file("./scripts/setup-instance.sh")
+  user_data = file("./scripts/setup-instance.sh")
 
   tags = merge(
     var.tags,

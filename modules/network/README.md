@@ -31,7 +31,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_candidato"></a> [candidato](#input\_candidato) | Nome do candidato | `string` | `"GuilhermeFranciscoDias"` | no |
 | <a name="input_projeto"></a> [projeto](#input\_projeto) | Nome do projeto | `string` | `"VExpenses"` | no |
-| <a name="input_tags"></a> [tags](#input\_tags) | Tags to be added to AWS resources | `map(any)` | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | Tags para adicionar nos recursos AWS | `map(any)` | n/a | yes |
 
 ## Outputs
 
